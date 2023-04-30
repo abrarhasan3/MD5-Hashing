@@ -178,11 +178,11 @@ public class Main {
 
     }
     public static void main(String[] args) {
-        String s="f";
+        String s="fio";
         s = strtobin(s);
         s=padding(s);
         s=add_len(s);
-        int round=3;
+        int round=4;
         for(int i=0;i<round;i++)
         {
             int op=16;
@@ -346,7 +346,7 @@ public class Main {
             String final_res = A+B+C+D;
             BigInteger f=new BigInteger(final_res,2);
 
-            System.out.println(f);
+            System.out.println("Round "+i +" Hash "+f);
         }
 
         String final_res = A+B+C+D;
