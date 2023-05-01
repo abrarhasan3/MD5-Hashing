@@ -5,92 +5,6 @@ import static java.lang.Math.*;
 
 public class Main {
 
-
-    public static String xor(String s1, String s2)
-    {
-        if(! (s1.length() == s2.length()))
-        {
-
-            System.out.println("S1 "+s1.length()+" S2 "+s2.length() );
-        }
-        int len = s1.length();
-        String res = null;
-        for(int i=0;i<len ; i++)
-        {
-            if(s1.charAt(i) == s2.charAt(i))
-            {
-
-                res+=0;
-            }
-            else
-            {
-                res+=1;
-            }
-
-        }
-        res= res.substring(4);
-        return res;
-    }
-    public static String and(String s1, String s2)
-    {
-        int len = s1.length();
-        String res = null;
-        for(int i=0;i<len ; i++)
-        {
-
-            if(s1.charAt(i) == '0' ||  s2.charAt(i)=='0')
-            {
-                res+=0;
-            }
-            else
-            {
-                res+=1;
-            }
-
-        }
-        res= res.substring(4);
-        return res;
-    }
-    public static String or(String s1, String s2)
-    {
-        int len = s1.length();
-        String res = null;
-        for(int i=0;i<len ; i++)
-        {
-
-            if(s1.charAt(i) == '1' ||  s2.charAt(i)=='1')
-            {
-                res+=1;
-            }
-            else
-            {
-                res+=0;
-            }
-
-        }
-        res= res.substring(4);
-        return res;
-    }
-    public static String not(String s1)
-    {
-        int len = s1.length();
-        String res = null;
-        for(int i=0;i<len ; i++)
-        {
-
-            if(s1.charAt(i) == '1' )
-            {
-                res+=0;
-            }
-            else
-            {
-                res+=1;
-            }
-        }
-        res= res.substring(4);
-        return res;
-    }
-
     public static String padding(String s)
     {
         String result = s;
@@ -168,7 +82,6 @@ public class Main {
     }
     public static String rotate(BigInteger big, int shift)
     {
-
         String res= big.toString(2);
         res=String.format("%32s", res).replaceAll(" ", "0");
         res = res.substring(shift)+res.substring(0,shift);
@@ -188,9 +101,7 @@ public class Main {
         BigInteger lenth = new BigInteger(""+s.length()*8);
 
         s = strtobin(s);
-
         s=padding(s);
-
         s=add_len(s,lenth);
 
 
@@ -427,9 +338,7 @@ public class Main {
             }
 
         }
-
-
-       System.out.println((""+A.toString(16)+""+B.toString(16)+""+C.toString(16)+""+D.toString(16)));
+        System.out.println((""+A.toString(16)+""+B.toString(16)+""+C.toString(16)+""+D.toString(16)));
 
     }
 }
