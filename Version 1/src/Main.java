@@ -4,11 +4,7 @@ import java.math.BigInteger;
 import static java.lang.Math.*;
 
 public class Main {
-    static String A = new BigInteger("1234567",16).toString(2);
 
-    static String B =  new BigInteger("8910abcdef",16).toString(2);
-    static String C = new BigInteger("fedcba1098",16).toString(2);
-    static String D = new BigInteger("76543210",16).toString(2);
 
     public static String xor(String s1, String s2)
     {
@@ -133,9 +129,9 @@ public class Main {
         result=tempS.toString();
         return result;
     }
-    public static String add_len(String s)
+    public static String add_len(String s, BigInteger len)
     {
-        BigInteger len = new BigInteger(""+s.length()*8);
+
         BigInteger t1 = new BigInteger("2");
         t1 = t1.pow(64);
         len= len.mod(t1);
@@ -147,22 +143,22 @@ public class Main {
 
         return s;
     }
-    public static String F()
+    public static String F(String B, String C, String D)
     {
         String res = and(or(B,C),and(not(B),D));
         return res;
     }
-    public static String G()
+    public static String G(String B, String C, String D)
     {
         String res = or(or(B,D),and(not(D),C));
         return res;
     }
-    public static String H()
+    public static String H(String B, String C, String D)
     {
         String res = xor(B,xor(C,D));
         return res;
     }
-    public static String I()
+    public static String I(String B, String C, String D)
     {
         String res = xor(C,or(B,not(D)));
         return res;
@@ -178,18 +174,42 @@ public class Main {
 
     }
     public static void main(String[] args) {
-        String s="fio";
+
+        String A = new BigInteger("1234567",16).toString(2);
+
+        String B =  new BigInteger("8910abcdef",16).toString(2);
+        String C = new BigInteger("fedcba1098",16).toString(2);
+        String D = new BigInteger("76543210",16).toString(2);
+
+        String s="They are deterministic";
+        System.out.println(s.length());
+        BigInteger lenth = new BigInteger(""+s.length()*8);
+
         s = strtobin(s);
+
         s=padding(s);
-        s=add_len(s);
+
+        s=add_len(s,lenth);
+
         int round=4;
+        BigInteger [] m1 = new BigInteger[16];
+        int s1=0,e1=32;
+        for(int i=0;i<16;i++)
+        {
+            m1[i]=new BigInteger(s.substring(s1,e1),2);
+            s1=e1+1;
+            e1=e1+32;
+        }
+
         for(int i=0;i<round;i++)
         {
             int op=16;
             int start=0,end=31;
+
             for(int j=0;j<op;j++)
             {
-                if(round == 0)
+
+                if(i == 0)
                 {
                     String CC=B, DD=C,AA=D, BB=A;
                     C=CC;
@@ -197,7 +217,7 @@ public class Main {
                     A=AA;
                     BigInteger mes = new BigInteger(s.substring(start,end),2);
                     BigInteger buff= new BigInteger(BB,2);
-                    buff = buff.add(new BigInteger(F(),2));
+                    buff = buff.add(new BigInteger(F(B,C,D),2));
                     buff= buff.mod(new BigInteger("2").pow(32));
                     mes = (mes.add(buff)).mod(new BigInteger("2").pow(32));
 
@@ -228,15 +248,16 @@ public class Main {
                     end=end+17;
 
                 }
-                else if(round == 1)
+                else if(i == 1)
                 {
+                    System.out.println(start);
                     String CC=B, DD=C,AA=D, BB=A;
                     C=CC;
                     D=DD;
                     A=AA;
                     BigInteger mes = new BigInteger(s.substring(start,end),2);
                     BigInteger buff= new BigInteger(BB,2);
-                    buff = buff.add(new BigInteger(G(),2));
+                    buff = buff.add(new BigInteger(G(B,C,D),2));
                     buff= buff.mod(new BigInteger("2").pow(32));
                     mes = (mes.add(buff)).mod(new BigInteger("2").pow(32));
 
@@ -267,15 +288,16 @@ public class Main {
                     end=end+17;
 
                 }
-                else if(round == 2)
+                else if(i == 2)
                 {
+
                     String CC=B, DD=C,AA=D, BB=A;
                     C=CC;
                     D=DD;
                     A=AA;
                     BigInteger mes = new BigInteger(s.substring(start,end),2);
                     BigInteger buff= new BigInteger(BB,2);
-                    buff = buff.add(new BigInteger(H(),2));
+                    buff = buff.add(new BigInteger(H(B,C,D),2));
                     buff= buff.mod(new BigInteger("2").pow(32));
                     mes = (mes.add(buff)).mod(new BigInteger("2").pow(32));
 
@@ -306,15 +328,16 @@ public class Main {
                     end=end+17;
 
                 }
-                else if(round == 3)
+                else if(i == 3)
                 {
+
                     String CC=B, DD=C,AA=D, BB=A;
                     C=CC;
                     D=DD;
                     A=AA;
                     BigInteger mes = new BigInteger(s.substring(start,end),2);
                     BigInteger buff= new BigInteger(BB,2);
-                    buff = buff.add(new BigInteger(I(),2));
+                    buff = buff.add(new BigInteger(I(B,C,D),2));
                     buff= buff.mod(new BigInteger("2").pow(32));
                     mes = (mes.add(buff)).mod(new BigInteger("2").pow(32));
 
